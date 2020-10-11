@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-nmea",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Node-RED node for parsing NMEA 0183 sentences",
   "main": "nmea.js",
   "scripts": {
