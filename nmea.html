@@ -1,0 +1,59 @@
+<script type="text/javascript">
+    RED.nodes.registerType('nmea',{
+        category: 'parser',
+        color: '#DEBD5C',
+        defaults: {
+            name: {value:""},
+            property: {value:"payload",required:true}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "font-awesome/fa-map-marker",
+        label: function() {
+            return this.name||"nmea";
+        },
+        oneditprepare: function() {
+            if (this.property === undefined) {
+                $("#node-input-property").val("payload");
+            }
+            $("#node-input-property").typedInput({default:'msg',types:['msg']});
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="nmea">
+    <div class="form-row">
+        <label for="node-input-property"><i class="fa fa-ellipsis-h"></i> <span data-i18n="node-red:common.label.property"></span></label>
+        <input type="text" id="node-input-property" style="width:70%;"/>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="nmea">
+    <p>A node that parses NMEA sentences into a JavaScript objects.</p>
+    <p>Specify the input property containing an NMEA sentence (default <code>msg.payload</code>).</p>
+    <p>Example output for a RMC sentence:
+        <pre>
+{
+    "sentence":"RMC",
+    "type":"nav-info",
+    "timestamp":"163948.00",
+    "status":"valid",
+    "lat":44.617677,
+    "latPole":"N",
+    "lon":-87.93293367,
+    "lonPole":"W",
+    "speedKnots":7.143,
+    "trackTrue":31.54,
+    "date":"111020",
+    "variation":0,
+    "variationPole":"",
+    "talker_id":"GP",
+    "dateTime":"2020-10-11T16:39:48.000Z"
+    }
+        </pre>
+    </p>
+</script>

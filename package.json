@@ -1,0 +1,32 @@
+{
+  "name": "node-red-contrib-nmea",
+  "version": "0.0.1",
+  "description": "Node-RED node for parsing NMEA 0183 sentences",
+  "main": "nmea.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nootropicdesign/node-red-contrib-nmea.git"
+  },
+  "keywords": [
+    "node-red",
+    "node-red-contrib",
+    "NMEA"
+  ],
+  "author": "Michael Krumpus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nootropicdesign/node-red-contrib-nmea/issues"
+  },
+  "homepage": "https://github.com/nootropicdesign/node-red-contrib-nmea#readme",
+  "node-red": {
+    "nodes": {
+      "nmea": "nmea.js"
+    }
+  },
+  "dependencies": {
+    "nmea": "^0.1.1"
+  }
+}
