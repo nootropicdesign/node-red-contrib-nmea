@@ -6,21 +6,23 @@ module.exports = function(RED) {
     function NMEANode(config) {
         RED.nodes.createNode(this,config);
         this.property = config.property || "payload";
+        this.outputProperty = config.outputProperty || "payload";
         var node = this;
         node.on('input', function(msg, send, done) {
             var value = RED.util.getMessageProperty(msg, node.property);
             if (value !== undefined) {
                 try {
-                    msg.payload = nmea.parse(value);
-                    if ((msg.payload.date) && (msg.payload.timestamp)) {
-                        msg.payload.dateTime = util.parseDateTime(msg.payload.date, msg.payload.timestamp);
+                    var output = nmea.parse(value);
+                    if ((output.date) && (output.timestamp)) {
+                        output.dateTime = util.parseDateTime(output.date, output.timestamp);
                     }
-                    if ((msg.payload.lat) && (msg.payload.latPole)) {
-                        msg.payload.lat = parseFloat(util.parseLatitude(msg.payload.lat, msg.payload.latPole));
+                    if ((output.lat) && (output.latPole)) {
+                        output.lat = parseFloat(util.parseLatitude(output.lat, output.latPole));
                     }
-                    if ((msg.payload.lon) && (msg.payload.lonPole)) {
-                        msg.payload.lon = parseFloat(util.parseLongitude(msg.payload.lon, msg.payload.lonPole));
+                    if ((output.lon) && (output.lonPole)) {
+                        output.lon = parseFloat(util.parseLongitude(output.lon, output.lonPole));
                     }
+                    RED.util.setMessageProperty(msg, node.outputProperty, output, true);
                 } catch (err) {
                     if (done) {
                         // Node-RED 1.0 compatible
